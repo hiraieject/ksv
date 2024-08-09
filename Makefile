@@ -4,7 +4,7 @@
 KS_KDRIVER = iol_kd.run
 KS_SUITE   = iol_sui.run
 
-install_ksv:
+install:
 	set -e; if [ ! -f /opt/keysight/iolibs/uninstall/iokerneldrivers-uninstall ] ; then \
 		make zcat_ksv; \
 		sudo chmod +x $(KS_KDRIVER); \
@@ -13,7 +13,10 @@ install_ksv:
 		sudo ./$(KS_SUITE) --mode unattended; \
 	fi
 
-uninstall_ksv:
+clean:
+	rm -f $(KS_KDRIVER) $(KS_SUITE)
+
+distclean:
 	set -e; if [ -f /opt/keysight/iolibs/uninstall/iokerneldrivers-uninstall ] ; then \
 		sudo /opt/keysight/iolibs/uninstall/iokerneldrivers-uninstall --mode unattended; \
 		sudo /opt/keysight/iolibs/uninstall/iolibrariessuite-uninstall --mode unattended; \
